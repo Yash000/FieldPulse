@@ -1,38 +1,45 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { LayoutDashboard, Users, Phone, Settings, Menu, Building2 } from 'lucide-react'
+import { useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  LayoutDashboard,
+  Users,
+  Phone,
+  Settings,
+  Menu,
+  Building2,
+} from 'lucide-react';
 
 const navigationItems = [
   {
-    title: "Dashboard",
-    url: "/dashboard",
+    title: 'Dashboard',
+    url: '/dashboard',
     icon: LayoutDashboard,
   },
   {
-    title: "Leads",
-    url: "/leads",
+    title: 'Leads',
+    url: '/leads',
     icon: Users,
   },
   {
-    title: "Calls",
-    url: "/calls",
+    title: 'Call History',
+    url: '/calls',
     icon: Phone,
   },
   {
-    title: "Settings",
-    url: "/settings",
+    title: 'Settings',
+    url: '/settings',
     icon: Settings,
   },
-]
+];
 
 export function MobileNav() {
-  const [open, setOpen] = useState(false)
-  const pathname = usePathname()
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -49,11 +56,13 @@ export function MobileNav() {
               <Building2 className="size-4" />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-semibold">CRM Pro</span>
-              <span className="truncate text-xs text-muted-foreground">Lead Management</span>
+              <span className="truncate font-semibold">FieldPulse CRM</span>
+              <span className="truncate text-xs text-muted-foreground">
+                Lead Management
+              </span>
             </div>
           </div>
-          
+
           <nav className="flex-1 px-2 py-4">
             <div className="space-y-2">
               {navigationItems.map((item) => (
@@ -63,8 +72,8 @@ export function MobileNav() {
                   onClick={() => setOpen(false)}
                   className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground ${
                     pathname === item.url
-                      ? "bg-accent text-accent-foreground"
-                      : "text-muted-foreground"
+                      ? 'bg-accent text-accent-foreground'
+                      : 'text-muted-foreground'
                   }`}
                 >
                   <item.icon className="h-4 w-4" />
@@ -93,5 +102,5 @@ export function MobileNav() {
         </div>
       </SheetContent>
     </Sheet>
-  )
+  );
 }

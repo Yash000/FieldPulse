@@ -1,9 +1,28 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { BarChart3, Users, Phone, TrendingUp, Shield, Smartphone, ArrowRight, CheckCircle, Star, Zap, Target, Clock } from 'lucide-react'
-import { PWAInstallPrompt } from "@/components/pwa-install-prompt"
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import {
+  BarChart3,
+  Users,
+  Phone,
+  TrendingUp,
+  Shield,
+  Smartphone,
+  ArrowRight,
+  CheckCircle,
+  Star,
+  Zap,
+  Target,
+  Clock,
+} from 'lucide-react';
+import { PWAInstallPrompt } from '@/components/pwa-install-prompt';
 
 export default function LandingPage() {
   return (
@@ -21,8 +40,9 @@ export default function LandingPage() {
               <span className="text-primary">Close More Deals</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Streamline your sales process with our intuitive CRM platform. Track leads,
-              manage calls, and gain insights that drive revenue growth.
+              Streamline your sales process with our intuitive CRM platform.
+              Track leads, manage calls, and gain insights that drive revenue
+              growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>
@@ -62,8 +82,8 @@ export default function LandingPage() {
               <span className="text-primary">Succeed</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Our comprehensive CRM platform provides all the tools you need to manage
-              your sales pipeline effectively.
+              Our comprehensive CRM platform provides all the tools you need to
+              manage your sales pipeline effectively.
             </p>
           </div>
 
@@ -75,7 +95,8 @@ export default function LandingPage() {
                 </div>
                 <CardTitle>Lead Management</CardTitle>
                 <CardDescription>
-                  Organize and track your leads with powerful categorization and filtering tools.
+                  Organize and track your leads with powerful categorization and
+                  filtering tools.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -103,7 +124,8 @@ export default function LandingPage() {
                 </div>
                 <CardTitle>Call Management</CardTitle>
                 <CardDescription>
-                  Track all your customer interactions with comprehensive call logging.
+                  Track all your customer interactions with comprehensive call
+                  logging.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -131,7 +153,8 @@ export default function LandingPage() {
                 </div>
                 <CardTitle>Analytics Dashboard</CardTitle>
                 <CardDescription>
-                  Get insights into your sales performance with real-time analytics.
+                  Get insights into your sales performance with real-time
+                  analytics.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -187,7 +210,8 @@ export default function LandingPage() {
                 </div>
                 <CardTitle>Secure & Reliable</CardTitle>
                 <CardDescription>
-                  Your data is protected with enterprise-grade security measures.
+                  Your data is protected with enterprise-grade security
+                  measures.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -248,7 +272,7 @@ export default function LandingPage() {
             </h2>
             <p className="text-xl opacity-90 max-w-2xl mx-auto">
               Join thousands of sales professionals who have transformed their
-              sales process with CRM Pro.
+              sales process with FieldPulse CRM.
             </p>
           </div>
 
@@ -287,12 +311,16 @@ export default function LandingPage() {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <Star
+                      key={i}
+                      className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                    />
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-4">
-                  "CRM Pro has completely transformed how we manage our sales pipeline.
-                  The interface is intuitive and the insights are invaluable."
+                  "FieldPulse CRM has completely transformed how we manage our
+                  sales pipeline. The interface is intuitive and the insights
+                  are invaluable."
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold">
@@ -300,7 +328,9 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <div className="font-semibold">John Smith</div>
-                    <div className="text-sm text-muted-foreground">Sales Director, TechCorp</div>
+                    <div className="text-sm text-muted-foreground">
+                      Sales Director, TechCorp
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -310,12 +340,16 @@ export default function LandingPage() {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <Star
+                      key={i}
+                      className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                    />
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-4">
-                  "The mobile app is fantastic. I can manage my leads and log calls
-                  on the go, which has significantly improved my productivity."
+                  "The mobile app is fantastic. I can manage my leads and log
+                  calls on the go, which has significantly improved my
+                  productivity."
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-white font-semibold">
@@ -323,7 +357,9 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <div className="font-semibold">Sarah Davis</div>
-                    <div className="text-sm text-muted-foreground">Account Manager, StartupXYZ</div>
+                    <div className="text-sm text-muted-foreground">
+                      Account Manager, StartupXYZ
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -333,12 +369,16 @@ export default function LandingPage() {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <Star
+                      key={i}
+                      className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                    />
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-4">
                   "The analytics dashboard gives us the insights we need to make
-                  data-driven decisions. Our conversion rate has improved by 35%."
+                  data-driven decisions. Our conversion rate has improved by
+                  35%."
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
@@ -346,7 +386,9 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <div className="font-semibold">Mike Chen</div>
-                    <div className="text-sm text-muted-foreground">VP Sales, Enterprise Inc</div>
+                    <div className="text-sm text-muted-foreground">
+                      VP Sales, Enterprise Inc
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -363,8 +405,9 @@ export default function LandingPage() {
               Ready to Transform Your Sales Process?
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
-              Join thousands of sales professionals who have already made the switch to CRM Pro.
-              Start your free trial today and see the difference.
+              Join thousands of sales professionals who have already made the
+              switch to FieldPulse CRM. Start your free trial today and see the
+              difference.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>
@@ -394,47 +437,132 @@ export default function LandingPage() {
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                   <BarChart3 className="size-4" />
                 </div>
-                <span className="font-bold text-xl">CRM Pro</span>
+                <span className="font-bold text-xl">FieldPulse CRM</span>
               </div>
               <p className="text-muted-foreground">
-                The modern CRM solution for sales teams who want to close more deals.
+                The modern CRM solution for sales teams who want to close more
+                deals.
               </p>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Product</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="#" className="hover:text-foreground transition-colors">Features</Link></li>
-                <li><Link href="#" className="hover:text-foreground transition-colors">Pricing</Link></li>
-                <li><Link href="#" className="hover:text-foreground transition-colors">API</Link></li>
-                <li><Link href="#" className="hover:text-foreground transition-colors">Integrations</Link></li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Features
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Pricing
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    API
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Integrations
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Company</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="#" className="hover:text-foreground transition-colors">About</Link></li>
-                <li><Link href="#" className="hover:text-foreground transition-colors">Blog</Link></li>
-                <li><Link href="#" className="hover:text-foreground transition-colors">Careers</Link></li>
-                <li><Link href="#" className="hover:text-foreground transition-colors">Contact</Link></li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Careers
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Contact
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Support</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="#" className="hover:text-foreground transition-colors">Help Center</Link></li>
-                <li><Link href="#" className="hover:text-foreground transition-colors">Documentation</Link></li>
-                <li><Link href="#" className="hover:text-foreground transition-colors">Status</Link></li>
-                <li><Link href="#" className="hover:text-foreground transition-colors">Privacy</Link></li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Help Center
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Documentation
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Status
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="hover:text-foreground transition-colors"
+                  >
+                    Privacy
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
           <div className="border-t mt-12 pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024 CRM Pro. All rights reserved.</p>
+            <p>&copy; 2024 FieldPulse CRM. All rights reserved.</p>
           </div>
         </div>
       </footer>
 
       <PWAInstallPrompt />
     </div>
-  )
+  );
 }

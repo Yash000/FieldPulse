@@ -1,22 +1,22 @@
-"use client"
+'use client';
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Building2 } from 'lucide-react'
-import { MobileNav } from "@/components/mobile-nav"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Building2 } from 'lucide-react';
+import { MobileNav } from '@/components/mobile-nav';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from '@/components/ui/dropdown-menu';
 
 export function AppHeader() {
-  const pathname = usePathname()
-  const isLandingPage = pathname === '/'
+  const pathname = usePathname();
+  const isLandingPage = pathname === '/';
 
   if (isLandingPage) {
     return (
@@ -27,21 +27,30 @@ export function AppHeader() {
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                 <Building2 className="size-4" />
               </div>
-              <span className="font-bold text-xl">CRM Pro</span>
+              <span className="font-bold text-xl">FieldPulse CRM</span>
             </Link>
-            
+
             <nav className="hidden md:flex items-center gap-6">
-              <Link href="#features" className="text-sm font-medium hover:text-primary transition-colors">
+              <Link
+                href="#features"
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
                 Features
               </Link>
-              <Link href="#pricing" className="text-sm font-medium hover:text-primary transition-colors">
+              <Link
+                href="#pricing"
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
                 Pricing
               </Link>
-              <Link href="#about" className="text-sm font-medium hover:text-primary transition-colors">
+              <Link
+                href="#about"
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
                 About
               </Link>
             </nav>
-            
+
             <div className="flex items-center gap-2">
               <ThemeToggle />
               <div className="hidden sm:flex items-center gap-4">
@@ -52,7 +61,7 @@ export function AppHeader() {
                   <Link href="/dashboard">Get Started</Link>
                 </Button>
               </div>
-              
+
               {/* Mobile menu for landing page */}
               <div className="md:hidden">
                 <DropdownMenu>
@@ -84,7 +93,7 @@ export function AppHeader() {
           </div>
         </div>
       </header>
-    )
+    );
   }
 
   return (
@@ -96,38 +105,35 @@ export function AppHeader() {
             <div className="flex aspect-square size-6 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Building2 className="size-3" />
             </div>
-            <span className="font-semibold text-sm">CRM Pro</span>
+            <span className="font-semibold text-sm">FieldPulse CRM</span>
           </Link>
         </div>
-        
+
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Avatar className="h-7 w-7">
-                  <AvatarImage src="/placeholder.svg?height=28&width=28" alt="User" />
+                  <AvatarImage
+                    src="/placeholder.svg?height=28&width=28"
+                    alt="User"
+                  />
                   <AvatarFallback className="text-xs">JD</AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
-              <DropdownMenuItem>
-                Profile
-              </DropdownMenuItem>
+              <DropdownMenuItem>Profile</DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/settings">Settings</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                Help & Support
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                Sign out
-              </DropdownMenuItem>
+              <DropdownMenuItem>Help & Support</DropdownMenuItem>
+              <DropdownMenuItem>Sign out</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </div>
     </header>
-  )
+  );
 }

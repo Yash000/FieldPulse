@@ -1,3 +1,4 @@
+import { useState } from "react"
 import {
     Dialog,
     DialogContent,
@@ -15,18 +16,32 @@ import { useRouter } from "next/navigation"
 import { TypeCall } from "@/app/calls/page"
 import { TypeLead } from "@/app/leads/page"
 
-export function CallResponseDialog(props: { callDetails: TypeCall | TypeLead, buttonClassName?: string | undefined }) {
+export function CallResponseDialog(props: {
+    callDetails: TypeCall | TypeLead,
+    buttonClassName?: string | undefined,
+    onSave?: (outcome: string) => void // <-- add this
+}) {
     const router = useRouter();
+    const [selectedOutcome, setSelectedOutcome] = useState<string>("");
+    const [saved, setSaved] = useState(false);
 
     const handleCallClick = () => {
         router.push(`tel:${props.callDetails.phone}`)
-    }
+    };
 
+    const handleSave = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (props.onSave) {
+            props.onSave(selectedOutcome);
+        }
+        setSaved(true);
+        setTimeout(() => setSaved(false), 1500);
+    };
 
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="outline" className={props.buttonClassName} size="sm" onClick={() => { handleCallClick() }}>
+                <Button variant="outline" className={props.buttonClassName} size="sm" onClick={handleCallClick}>
                     <Phone className="h-4 w-4 mr-2" />
                     Call Back
                 </Button>
@@ -34,8 +49,13 @@ export function CallResponseDialog(props: { callDetails: TypeCall | TypeLead, bu
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>How did your call go?</DialogTitle>
-                    <form className="flex flex-col gap-4 items-center mt-5">
-                        <Select name="choices">
+                    <form className="flex flex-col gap-4 items-center mt-5" onSubmit={handleSave}>
+                        <Select
+                            name="choices"
+                            value={selectedOutcome}
+                            onValueChange={setSelectedOutcome}
+                            required
+                        >
                             <SelectTrigger className="w-full">
                                 <SelectValue placeholder="How was your call" />
                             </SelectTrigger>
@@ -49,10 +69,15 @@ export function CallResponseDialog(props: { callDetails: TypeCall | TypeLead, bu
                                 <SelectItem value="WrongNumber">Wrong Number</SelectItem>
                             </SelectContent>
                         </Select>
-                        <Button>Save</Button>
+                        <Button type="submit" disabled={!selectedOutcome}>
+                            Save
+                        </Button>
+                        {saved && (
+                            <span className="text-green-600 text-sm mt-2">Saved!</span>
+                        )}
                     </form>
                 </DialogHeader>
             </DialogContent>
         </Dialog>
-    )
+    );
 }
