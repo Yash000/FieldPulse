@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { BarChart3, Users, Phone, TrendingUp, Shield, Smartphone, ArrowRight, CheckCircle, Star, Zap, Target, Clock } from 'lucide-react'
+import { PWAInstallPrompt } from "@/components/pwa-install-prompt"
 
 export default function LandingPage() {
   return (
@@ -20,7 +21,7 @@ export default function LandingPage() {
               <span className="text-primary">Close More Deals</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Streamline your sales process with our intuitive CRM platform. Track leads, 
+              Streamline your sales process with our intuitive CRM platform. Track leads,
               manage calls, and gain insights that drive revenue growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -61,7 +62,7 @@ export default function LandingPage() {
               <span className="text-primary">Succeed</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Our comprehensive CRM platform provides all the tools you need to manage 
+              Our comprehensive CRM platform provides all the tools you need to manage
               your sales pipeline effectively.
             </p>
           </div>
@@ -246,7 +247,7 @@ export default function LandingPage() {
               Trusted by Sales Teams Worldwide
             </h2>
             <p className="text-xl opacity-90 max-w-2xl mx-auto">
-              Join thousands of sales professionals who have transformed their 
+              Join thousands of sales professionals who have transformed their
               sales process with CRM Pro.
             </p>
           </div>
@@ -290,7 +291,7 @@ export default function LandingPage() {
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-4">
-                  "CRM Pro has completely transformed how we manage our sales pipeline. 
+                  "CRM Pro has completely transformed how we manage our sales pipeline.
                   The interface is intuitive and the insights are invaluable."
                 </p>
                 <div className="flex items-center gap-3">
@@ -313,7 +314,7 @@ export default function LandingPage() {
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-4">
-                  "The mobile app is fantastic. I can manage my leads and log calls 
+                  "The mobile app is fantastic. I can manage my leads and log calls
                   on the go, which has significantly improved my productivity."
                 </p>
                 <div className="flex items-center gap-3">
@@ -336,7 +337,7 @@ export default function LandingPage() {
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-4">
-                  "The analytics dashboard gives us the insights we need to make 
+                  "The analytics dashboard gives us the insights we need to make
                   data-driven decisions. Our conversion rate has improved by 35%."
                 </p>
                 <div className="flex items-center gap-3">
@@ -362,7 +363,7 @@ export default function LandingPage() {
               Ready to Transform Your Sales Process?
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
-              Join thousands of sales professionals who have already made the switch to CRM Pro. 
+              Join thousands of sales professionals who have already made the switch to CRM Pro.
               Start your free trial today and see the difference.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -432,6 +433,8 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
+
+      <PWAInstallPrompt />
     </div>
   )
 }

@@ -20,7 +20,7 @@ export function AppHeader() {
 
   if (isLandingPage) {
     return (
-      <header className="border-b sticky top-0 z-50">
+      <header className="border-b sticky top-0 z-[200] brightness-125 backdrop-blur-xl drop-shadow-2xl shadow-2xl">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-center gap-2">
@@ -88,7 +88,7 @@ export function AppHeader() {
   }
 
   return (
-    <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 md:hidden">
+    <header className="border-b supports-[backdrop-filter]:bg-background/60 sticky top-0 z-[200] brightness-150 backdrop-blur-2xl drop-shadow-2xl md:hidden">
       <div className="container flex h-14 items-center justify-between px-4">
         <div className="flex items-center gap-2">
           <MobileNav />
