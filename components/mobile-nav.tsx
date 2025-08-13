@@ -13,6 +13,8 @@ import {
   Menu,
   Building2,
 } from 'lucide-react';
+import { mockLeads } from '@/app/leads/page';
+import { mockCalls } from '@/app/calls/page';
 
 const navigationItems = [
   {
@@ -40,6 +42,22 @@ const navigationItems = [
 export function MobileNav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+
+  // Stats from leads and calls
+  const totalLeads = mockLeads.length;
+  const activeCalls = mockCalls.length;
+  // Example conversion rate: percentage of leads with outcome "won" (customize as needed)
+  // For demo, use percentage of leads with outcome set
+  const conversionRate =
+    totalLeads > 0
+      ? (
+          (mockLeads.filter(
+            (l) => l.outcome && l.outcome.toLowerCase() === 'won'
+          ).length /
+            totalLeads) *
+          100
+        ).toFixed(1)
+      : '0';
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -87,15 +105,19 @@ export function MobileNav() {
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Total Leads</span>
-                <span className="font-medium">1,247</span>
+                <span className="font-medium">
+                  {totalLeads.toLocaleString()}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Active Calls</span>
-                <span className="font-medium">23</span>
+                <span className="font-medium">
+                  {activeCalls.toLocaleString()}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Conversion</span>
-                <span className="font-medium">18.5%</span>
+                <span className="font-medium">{conversionRate}%</span>
               </div>
             </div>
           </div>

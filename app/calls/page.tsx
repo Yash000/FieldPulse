@@ -38,7 +38,7 @@ import {
 import { CallResponseDialog } from '@/components/call-response-dialog';
 
 // Mock calls data
-const mockCalls: TypeCall[] = [
+export const mockCalls: TypeCall[] = [
   {
     id: 1,
     phone: '+91 98765 43210',

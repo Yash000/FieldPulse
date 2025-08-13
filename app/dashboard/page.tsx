@@ -1,9 +1,18 @@
-import { Suspense } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
-import { Users, Phone, TrendingUp, DollarSign, Calendar, Clock, ArrowUpRight, ArrowDownRight } from 'lucide-react'
+import { Suspense } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import {
+  Users,
+  Phone,
+  TrendingUp,
+  DollarSign,
+  Calendar,
+  Clock,
+  ArrowUpRight,
+  ArrowDownRight,
+} from 'lucide-react';
 
 // Mock data for dashboard
 const dashboardData = {
@@ -12,17 +21,66 @@ const dashboardData = {
   conversionRate: 18.5,
   revenue: 125400,
   recentLeads: [
-    { id: 1, name: "Sarah Johnson", company: "TechCorp", status: "hot", value: 15000, lastContact: "2 hours ago" },
-    { id: 2, name: "Mike Chen", company: "StartupXYZ", status: "warm", value: 8500, lastContact: "1 day ago" },
-    { id: 3, name: "Emily Davis", company: "Enterprise Inc", status: "cold", value: 25000, lastContact: "3 days ago" },
-    { id: 4, name: "John Smith", company: "Local Business", status: "warm", value: 5200, lastContact: "5 hours ago" },
+    {
+      id: 1,
+      name: 'Amit Sharma',
+      company: 'Infotech Solutions',
+      status: 'hot',
+      value: 120000,
+      lastContact: '2 hours ago',
+    },
+    {
+      id: 2,
+      name: 'Priya Verma',
+      company: 'StartupHub',
+      status: 'warm',
+      value: 85000,
+      lastContact: '1 day ago',
+    },
+    {
+      id: 3,
+      name: 'Rohan Gupta',
+      company: 'EnterpriseTech',
+      status: 'cold',
+      value: 250000,
+      lastContact: '3 days ago',
+    },
+    {
+      id: 4,
+      name: 'Sneha Iyer',
+      company: 'LocalBiz',
+      status: 'warm',
+      value: 52000,
+      lastContact: '5 hours ago',
+    },
   ],
   recentCalls: [
-    { id: 1, contact: "Sarah Johnson", type: "outbound", duration: "12:34", status: "completed", time: "10:30 AM" },
-    { id: 2, contact: "Mike Chen", type: "inbound", duration: "8:15", status: "missed", time: "9:45 AM" },
-    { id: 3, contact: "Emily Davis", type: "outbound", duration: "15:22", status: "completed", time: "9:15 AM" },
-  ]
-}
+    {
+      id: 1,
+      contact: 'Amit Sharma',
+      type: 'outbound',
+      duration: '10:22',
+      status: 'completed',
+      time: '10:30 AM',
+    },
+    {
+      id: 2,
+      contact: 'Priya Verma',
+      type: 'inbound',
+      duration: '8:15',
+      status: 'missed',
+      time: '9:45 AM',
+    },
+    {
+      id: 3,
+      contact: 'Rohan Gupta',
+      type: 'outbound',
+      duration: '15:22',
+      status: 'completed',
+      time: '9:15 AM',
+    },
+  ],
+};
 
 function DashboardMetrics() {
   return (
@@ -33,7 +91,9 @@ function DashboardMetrics() {
           <Users className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{dashboardData.totalLeads.toLocaleString()}</div>
+          <div className="text-2xl font-bold">
+            {dashboardData.totalLeads.toLocaleString()}
+          </div>
           <p className="text-xs text-muted-foreground">
             <span className="text-green-600 flex items-center">
               <ArrowUpRight className="h-3 w-3 mr-1" />
@@ -43,7 +103,7 @@ function DashboardMetrics() {
           </p>
         </CardContent>
       </Card>
-      
+
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Active Calls</CardTitle>
@@ -60,25 +120,29 @@ function DashboardMetrics() {
           </p>
         </CardContent>
       </Card>
-      
+
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Conversion Rate</CardTitle>
           <TrendingUp className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{dashboardData.conversionRate}%</div>
+          <div className="text-2xl font-bold">
+            {dashboardData.conversionRate}%
+          </div>
           <Progress value={dashboardData.conversionRate} className="mt-2" />
         </CardContent>
       </Card>
-      
+
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Revenue</CardTitle>
           <DollarSign className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">${dashboardData.revenue.toLocaleString()}</div>
+          <div className="text-2xl font-bold">
+            ₹{dashboardData.revenue.toLocaleString()}
+          </div>
           <p className="text-xs text-muted-foreground">
             <span className="text-green-600 flex items-center">
               <ArrowUpRight className="h-3 w-3 mr-1" />
@@ -89,18 +153,22 @@ function DashboardMetrics() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
 
 function RecentLeads() {
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'hot': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
-      case 'warm': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
-      case 'cold': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300'
+      case 'hot':
+        return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
+      case 'warm':
+        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
+      case 'cold':
+        return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
+      default:
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
     }
-  }
+  };
 
   return (
     <Card>
@@ -115,11 +183,16 @@ function RecentLeads() {
       <CardContent>
         <div className="space-y-4">
           {dashboardData.recentLeads.map((lead) => (
-            <div key={lead.id} className="flex items-center justify-between p-3 rounded-lg border">
+            <div
+              key={lead.id}
+              className="flex items-center justify-between p-3 rounded-lg border"
+            >
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
                   <h4 className="font-medium">{lead.name}</h4>
-                  <Badge className={getStatusColor(lead.status)}>{lead.status}</Badge>
+                  <Badge className={getStatusColor(lead.status)}>
+                    {lead.status}
+                  </Badge>
                 </div>
                 <p className="text-sm text-muted-foreground">{lead.company}</p>
                 <p className="text-xs text-muted-foreground flex items-center mt-1">
@@ -128,25 +201,29 @@ function RecentLeads() {
                 </p>
               </div>
               <div className="text-right">
-                <p className="font-semibold">${lead.value.toLocaleString()}</p>
+                <p className="font-semibold">₹{lead.value.toLocaleString()}</p>
               </div>
             </div>
           ))}
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 function RecentCalls() {
   const getCallStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return 'text-green-600'
-      case 'missed': return 'text-red-600'
-      case 'ongoing': return 'text-blue-600'
-      default: return 'text-gray-600'
+      case 'completed':
+        return 'text-green-600';
+      case 'missed':
+        return 'text-red-600';
+      case 'ongoing':
+        return 'text-blue-600';
+      default:
+        return 'text-gray-600';
     }
-  }
+  };
 
   return (
     <Card>
@@ -161,14 +238,31 @@ function RecentCalls() {
       <CardContent>
         <div className="space-y-4">
           {dashboardData.recentCalls.map((call) => (
-            <div key={call.id} className="flex items-center justify-between p-3 rounded-lg border">
+            <div
+              key={call.id}
+              className="flex items-center justify-between p-3 rounded-lg border"
+            >
               <div className="flex items-center gap-3">
-                <div className={`p-2 rounded-full ${call.type === 'inbound' ? 'bg-green-100 dark:bg-green-900' : 'bg-blue-100 dark:bg-blue-900'}`}>
-                  <Phone className={`h-4 w-4 ${call.type === 'inbound' ? 'text-green-600 dark:text-green-300' : 'text-blue-600 dark:text-blue-300'}`} />
+                <div
+                  className={`p-2 rounded-full ${
+                    call.type === 'inbound'
+                      ? 'bg-green-100 dark:bg-green-900'
+                      : 'bg-blue-100 dark:bg-blue-900'
+                  }`}
+                >
+                  <Phone
+                    className={`h-4 w-4 ${
+                      call.type === 'inbound'
+                        ? 'text-green-600 dark:text-green-300'
+                        : 'text-blue-600 dark:text-blue-300'
+                    }`}
+                  />
                 </div>
                 <div>
                   <h4 className="font-medium">{call.contact}</h4>
-                  <p className="text-sm text-muted-foreground capitalize">{call.type} call</p>
+                  <p className="text-sm text-muted-foreground capitalize">
+                    {call.type} call
+                  </p>
                 </div>
               </div>
               <div className="text-right">
@@ -182,7 +276,7 @@ function RecentCalls() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 export default function DashboardPage() {
@@ -216,5 +310,5 @@ export default function DashboardPage() {
         </Suspense>
       </div>
     </div>
-  )
+  );
 }

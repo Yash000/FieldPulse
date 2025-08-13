@@ -51,11 +51,6 @@ const navigationItems = [
     url: '/calls',
     icon: Phone,
   },
-  {
-    title: 'Settings',
-    url: '/settings',
-    icon: Settings,
-  },
 ];
 
 export function AppSidebar() {

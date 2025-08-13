@@ -50,7 +50,7 @@ import { useRouter } from 'next/navigation';
 import { CallResponseDialog } from '@/components/call-response-dialog';
 
 // Mock leads data
-const mockLeads: TypeLead[] = [
+export const mockLeads: TypeLead[] = [
   {
     id: 1,
     name: 'Amit Sharma',
@@ -132,6 +132,8 @@ export type TypeLead = {
   source: string;
   lastContact: string;
   notes: string;
+  isNew?: boolean;
+  outcome?: string; // <-- Add this
 };
 
 export default function LeadsPage() {
@@ -184,6 +186,7 @@ export default function LeadsPage() {
       source: formData.get('source') as string,
       lastContact: new Date().toISOString().split('T')[0],
       notes: formData.get('notes') as string,
+      isNew: true, // <-- Add this
     };
     setLeads([...leads, newLead]);
     setIsAddDialogOpen(false);
@@ -626,7 +629,14 @@ export default function LeadsPage() {
             <CardHeader className="pb-3">
               <div className="flex items-start justify-between">
                 <div>
-                  <CardTitle className="text-lg">{lead.name}</CardTitle>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    {lead.name}
+                    {lead.isNew && (
+                      <Badge className="bg-green-100 text-green-800 ml-2">
+                        New
+                      </Badge>
+                    )}
+                  </CardTitle>
                   <p className="text-sm text-muted-foreground">
                     {lead.position}
                   </p>
@@ -685,7 +695,7 @@ export default function LeadsPage() {
                     Deal Value
                   </span>
                   <span className="font-semibold">
-                    ${lead.value.toLocaleString()}
+                    ₹{lead.value.toLocaleString()}
                   </span>
                 </div>
                 <div className="flex items-center justify-between mt-1">
@@ -704,6 +714,13 @@ export default function LeadsPage() {
                 <CallResponseDialog
                   buttonClassName="flex-1 bg-transparent"
                   callDetails={lead}
+                  onSave={(outcome) => {
+                    setLeads((prevLeads) =>
+                      prevLeads.map((l) =>
+                        l.id === lead.id ? { ...l, outcome } : l
+                      )
+                    );
+                  }}
                 />
                 <Button
                   size="sm"
@@ -717,6 +734,11 @@ export default function LeadsPage() {
                   Email
                 </Button>
               </div>
+              {lead.outcome && (
+                <Badge className="bg-purple-100 text-purple-800">
+                  {lead.outcome}
+                </Badge>
+              )}
             </CardContent>
           </Card>
         ))}
