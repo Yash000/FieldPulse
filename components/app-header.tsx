@@ -55,10 +55,10 @@ export function AppHeader() {
               <ThemeToggle />
               <div className="hidden sm:flex items-center gap-4">
                 <Button variant="ghost" asChild>
-                  <Link href="/dashboard">Sign In</Link>
+                  <Link href="/signin">Sign In</Link>
                 </Button>
                 <Button asChild>
-                  <Link href="/dashboard">Get Started</Link>
+                  <Link href="/signup">Get Started</Link>
                 </Button>
               </div>
 
@@ -81,10 +81,10 @@ export function AppHeader() {
                       <Link href="#about">About</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link href="/dashboard">Sign In</Link>
+                      <Link href="/signin">Sign In</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link href="/dashboard">Get Started</Link>
+                      <Link href="/signup">Get Started</Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
