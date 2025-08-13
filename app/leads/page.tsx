@@ -1,13 +1,19 @@
-"use client"
+'use client';
 
-import type React from "react"
+import type React from 'react';
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import {
   Dialog,
   DialogContent,
@@ -15,10 +21,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+} from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Search,
   Plus,
@@ -32,330 +38,350 @@ import {
   FileText,
   CheckCircle,
   AlertCircle,
-} from "lucide-react"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { useRouter } from "next/navigation"
-import { CallResponseDialog } from "@/components/call-response-dialog"
+} from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useRouter } from 'next/navigation';
+import { CallResponseDialog } from '@/components/call-response-dialog';
 
 // Mock leads data
 const mockLeads: TypeLead[] = [
   {
     id: 1,
-    name: "Sarah Johnson",
-    email: "sarah@techcorp.com",
-    phone: "+1 (555) 123-4567",
-    company: "TechCorp",
-    position: "CTO",
-    status: "Hot",
+    name: 'Sarah Johnson',
+    email: 'sarah@techcorp.com',
+    phone: '+1 (555) 123-4567',
+    company: 'TechCorp',
+    position: 'CTO',
+    status: 'Hot',
     value: 15000,
-    source: "Website",
-    lastContact: "2024-01-15",
-    notes: "Interested in enterprise solution",
+    source: 'Website',
+    lastContact: '2024-01-15',
+    notes: 'Interested in enterprise solution',
   },
   {
     id: 2,
-    name: "Mike Chen",
-    email: "mike@startupxyz.com",
-    phone: "+1 (555) 234-5678",
-    company: "StartupXYZ",
-    position: "Founder",
-    status: "Warm",
+    name: 'Mike Chen',
+    email: 'mike@startupxyz.com',
+    phone: '+1 (555) 234-5678',
+    company: 'StartupXYZ',
+    position: 'Founder',
+    status: 'Warm',
     value: 8500,
-    source: "Referral",
-    lastContact: "2024-01-14",
-    notes: "Looking for cost-effective solution",
+    source: 'Referral',
+    lastContact: '2024-01-14',
+    notes: 'Looking for cost-effective solution',
   },
   {
     id: 3,
-    name: "Emily Davis",
-    email: "emily@enterprise.com",
-    phone: "+1 (555) 345-6789",
-    company: "Enterprise Inc",
-    position: "VP Sales",
-    status: "Cold",
+    name: 'Emily Davis',
+    email: 'emily@enterprise.com',
+    phone: '+1 (555) 345-6789',
+    company: 'Enterprise Inc',
+    position: 'VP Sales',
+    status: 'Cold',
     value: 25000,
-    source: "LinkedIn",
-    lastContact: "2024-01-12",
-    notes: "Large enterprise client potential",
+    source: 'LinkedIn',
+    lastContact: '2024-01-12',
+    notes: 'Large enterprise client potential',
   },
   {
     id: 4,
-    name: "John Smith",
-    email: "john@localbiz.com",
-    phone: "+1 (555) 456-7890",
-    company: "Local Business",
-    position: "Owner",
-    status: "Warm",
+    name: 'John Smith',
+    email: 'john@localbiz.com',
+    phone: '+1 (555) 456-7890',
+    company: 'Local Business',
+    position: 'Owner',
+    status: 'Warm',
     value: 5200,
-    source: "Cold Call",
-    lastContact: "2024-01-15",
-    notes: "Small business, budget conscious",
+    source: 'Cold Call',
+    lastContact: '2024-01-15',
+    notes: 'Small business, budget conscious',
   },
   {
     id: 5,
-    name: "Lisa Wang",
-    email: "lisa@innovate.com",
-    phone: "+1 (555) 567-8901",
-    company: "Innovate Solutions",
-    position: "Director",
-    status: "Hot",
+    name: 'Lisa Wang',
+    email: 'lisa@innovate.com',
+    phone: '+1 (555) 567-8901',
+    company: 'Innovate Solutions',
+    position: 'Director',
+    status: 'Hot',
     value: 18000,
-    source: "Trade Show",
-    lastContact: "2024-01-15",
-    notes: "Ready to move forward quickly",
+    source: 'Trade Show',
+    lastContact: '2024-01-15',
+    notes: 'Ready to move forward quickly',
   },
-]
+];
 
-type LeadStatus = "Hot" | "Warm" | "Cold";
+type LeadStatus = 'Hot' | 'Warm' | 'Cold';
 
 export type TypeLead = {
-  id: number,
-  name: string,
-  email: string,
-  phone: string,
-  company: string,
-  position: string,
-  status: LeadStatus,
-  value: number,
-  source: string,
-  lastContact: string,
-  notes: string,
-}
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  company: string;
+  position: string;
+  status: LeadStatus;
+  value: number;
+  source: string;
+  lastContact: string;
+  notes: string;
+};
 
 export default function LeadsPage() {
-  const [leads, setLeads] = useState(mockLeads)
-  const [searchTerm, setSearchTerm] = useState("")
-  const [statusFilter, setStatusFilter] = useState("all")
-  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
-  const [csvFile, setCsvFile] = useState<File | null>(null)
-  const [csvPreview, setCsvPreview] = useState<any[]>([])
-  const [csvError, setCsvError] = useState<string>("")
-  const [isProcessingCsv, setIsProcessingCsv] = useState(false)
+  const [leads, setLeads] = useState(mockLeads);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [csvFile, setCsvFile] = useState<File | null>(null);
+  const [csvPreview, setCsvPreview] = useState<any[]>([]);
+  const [csvError, setCsvError] = useState<string>('');
+  const [isProcessingCsv, setIsProcessingCsv] = useState(false);
 
   const router = useRouter();
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "hot":
-        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
-      case "warm":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300"
-      case "cold":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
+      case 'hot':
+        return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
+      case 'warm':
+        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
+      case 'cold':
+        return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300"
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300';
     }
-  }
+  };
 
   const filteredLeads = leads.filter((lead) => {
     const matchesSearch =
       lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       lead.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      lead.email.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesStatus = statusFilter === "all" || lead.status === statusFilter
-    return matchesSearch && matchesStatus
-  })
+      lead.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus =
+      statusFilter === 'all' || lead.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
 
   const handleAddLead = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
     const newLead: TypeLead = {
       id: leads.length + 1,
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      phone: formData.get("phone") as string,
-      company: formData.get("company") as string,
-      position: formData.get("position") as string,
-      status: formData.get("status") as LeadStatus,
-      value: Number.parseInt(formData.get("value") as string),
-      source: formData.get("source") as string,
-      lastContact: new Date().toISOString().split("T")[0],
-      notes: formData.get("notes") as string,
-    }
-    setLeads([...leads, newLead])
-    setIsAddDialogOpen(false)
-  }
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      company: formData.get('company') as string,
+      position: formData.get('position') as string,
+      status: formData.get('status') as LeadStatus,
+      value: Number.parseInt(formData.get('value') as string),
+      source: formData.get('source') as string,
+      lastContact: new Date().toISOString().split('T')[0],
+      notes: formData.get('notes') as string,
+    };
+    setLeads([...leads, newLead]);
+    setIsAddDialogOpen(false);
+  };
 
-  const handleCallClick = (lead: typeof mockLeads[0]) => {
-    router.push(`tel:${lead.phone}`)
-  }
+  const handleCallClick = (lead: (typeof mockLeads)[0]) => {
+    router.push(`tel:${lead.phone}`);
+  };
 
-  const handleEmailClick = (lead: typeof mockLeads[0]) => {
-    router.push(`mailto:${lead.email}`)
-  }
+  const handleEmailClick = (lead: (typeof mockLeads)[0]) => {
+    router.push(`mailto:${lead.email}`);
+  };
 
   const handleCsvFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
+    const file = event.target.files?.[0];
     if (file) {
-      setCsvFile(file)
-      setCsvError("")
-      parseCsvFile(file)
+      setCsvFile(file);
+      setCsvError('');
+      parseCsvFile(file);
     }
-  }
+  };
 
   const parseCsvFile = (file: File) => {
-    setIsProcessingCsv(true)
-    const reader = new FileReader()
+    setIsProcessingCsv(true);
+    const reader = new FileReader();
 
     reader.onload = (e) => {
       try {
-        const text = e.target?.result as string
-        const lines = text.split("\n").filter((line) => line.trim())
+        const text = e.target?.result as string;
+        const lines = text.split('\n').filter((line) => line.trim());
 
         if (lines.length < 2) {
-          setCsvError("CSV file must contain at least a header row and one data row")
-          setIsProcessingCsv(false)
-          return
+          setCsvError(
+            'CSV file must contain at least a header row and one data row'
+          );
+          setIsProcessingCsv(false);
+          return;
         }
 
-        const headers = lines[0].split(",").map((h) => h.trim().toLowerCase())
-        const requiredHeaders = ["name", "email", "company"]
-        const missingHeaders = requiredHeaders.filter((h) => !headers.includes(h))
+        const headers = lines[0].split(',').map((h) => h.trim().toLowerCase());
+        const requiredHeaders = ['name', 'email', 'phone'];
+        const missingHeaders = requiredHeaders.filter(
+          (h) => !headers.includes(h)
+        );
 
         if (missingHeaders.length > 0) {
-          setCsvError(`Missing required columns: ${missingHeaders.join(", ")}`)
-          setIsProcessingCsv(false)
-          return
+          setCsvError(`Missing required columns: ${missingHeaders.join(', ')}`);
+          setIsProcessingCsv(false);
+          return;
         }
 
         const preview = lines.slice(1, 6).map((line, index) => {
-          const values = line.split(",").map((v) => v.trim().replace(/^"|"$/g, ""))
-          const lead: any = { id: `preview-${index}` }
+          const values = line
+            .split(',')
+            .map((v) => v.trim().replace(/^"|"$/g, ''));
+          const lead: any = { id: `preview-${index}` };
 
           headers.forEach((header, i) => {
             switch (header) {
-              case "name":
-                lead.name = values[i] || ""
-                break
-              case "email":
-                lead.email = values[i] || ""
-                break
-              case "phone":
-                lead.phone = values[i] || ""
-                break
-              case "company":
-                lead.company = values[i] || ""
-                break
-              case "position":
-                lead.position = values[i] || ""
-                break
-              case "status":
-                lead.status = ["hot", "warm", "cold"].includes(values[i]?.toLowerCase())
+              case 'name':
+                lead.name = values[i] || '';
+                break;
+              case 'email':
+                lead.email = values[i] || '';
+                break;
+              case 'phone':
+                lead.phone = values[i] || '';
+                break;
+              case 'company':
+                lead.company = values[i] || '';
+                break;
+              case 'position':
+                lead.position = values[i] || '';
+                break;
+              case 'status':
+                lead.status = ['hot', 'warm', 'cold'].includes(
+                  values[i]?.toLowerCase()
+                )
                   ? values[i].toLowerCase()
-                  : "cold"
-                break
-              case "value":
-                lead.value = Number.parseInt(values[i]) || 0
-                break
-              case "source":
-                lead.source = values[i] || "CSV Import"
-                break
-              case "notes":
-                lead.notes = values[i] || ""
-                break
+                  : 'cold';
+                break;
+              case 'value':
+                lead.value = Number.parseInt(values[i]) || 0;
+                break;
+              case 'source':
+                lead.source = values[i] || 'CSV Import';
+                break;
+              case 'notes':
+                lead.notes = values[i] || '';
+                break;
             }
-          })
+          });
 
-          return lead
-        })
+          return lead;
+        });
 
-        setCsvPreview(preview)
-        setIsProcessingCsv(false)
+        setCsvPreview(preview);
+        setIsProcessingCsv(false);
       } catch (error) {
-        setCsvError("Error parsing CSV file. Please check the format.")
-        setIsProcessingCsv(false)
+        setCsvError('Error parsing CSV file. Please check the format.');
+        setIsProcessingCsv(false);
       }
-    }
+    };
 
-    reader.readAsText(file)
-  }
+    reader.readAsText(file);
+  };
 
   const handleCsvImport = () => {
-    if (!csvFile) return
+    if (!csvFile) return;
 
-    setIsProcessingCsv(true)
-    const reader = new FileReader()
+    setIsProcessingCsv(true);
+    const reader = new FileReader();
 
     reader.onload = (e) => {
       try {
-        const text = e.target?.result as string
-        const lines = text.split("\n").filter((line) => line.trim())
-        const headers = lines[0].split(",").map((h) => h.trim().toLowerCase())
+        const text = e.target?.result as string;
+        const lines = text.split('\n').filter((line) => line.trim());
+        const headers = lines[0].split(',').map((h) => h.trim().toLowerCase());
 
         const newLeads = lines
           .slice(1)
           .map((line, index) => {
-            const values = line.split(",").map((v) => v.trim().replace(/^"|"$/g, ""))
-            const lead: any = { id: leads.length + index + 1 }
+            const values = line
+              .split(',')
+              .map((v) => v.trim().replace(/^"|"$/g, ''));
+            const lead: any = { id: leads.length + index + 1 };
 
             headers.forEach((header, i) => {
               switch (header) {
-                case "name":
-                  lead.name = values[i] || ""
-                  break
-                case "email":
-                  lead.email = values[i] || ""
-                  break
-                case "phone":
-                  lead.phone = values[i] || ""
-                  break
-                case "company":
-                  lead.company = values[i] || ""
-                  break
-                case "position":
-                  lead.position = values[i] || ""
-                  break
-                case "status":
-                  lead.status = ["hot", "warm", "cold"].includes(values[i]?.toLowerCase())
+                case 'name':
+                  lead.name = values[i] || '';
+                  break;
+                case 'email':
+                  lead.email = values[i] || '';
+                  break;
+                case 'phone':
+                  lead.phone = values[i] || '';
+                  break;
+                case 'company':
+                  lead.company = values[i] || '';
+                  break;
+                case 'position':
+                  lead.position = values[i] || '';
+                  break;
+                case 'status':
+                  lead.status = ['hot', 'warm', 'cold'].includes(
+                    values[i]?.toLowerCase()
+                  )
                     ? values[i].toLowerCase()
-                    : "cold"
-                  break
-                case "value":
-                  lead.value = Number.parseInt(values[i]) || 0
-                  break
-                case "source":
-                  lead.source = values[i] || "CSV Import"
-                  break
-                case "notes":
-                  lead.notes = values[i] || ""
-                  break
+                    : 'cold';
+                  break;
+                case 'value':
+                  lead.value = Number.parseInt(values[i]) || 0;
+                  break;
+                case 'source':
+                  lead.source = values[i] || 'CSV Import';
+                  break;
+                case 'notes':
+                  lead.notes = values[i] || '';
+                  break;
               }
-            })
+            });
 
-            lead.lastContact = new Date().toISOString().split("T")[0]
-            return lead
+            lead.lastContact = new Date().toISOString().split('T')[0];
+            return lead;
           })
-          .filter((lead) => lead.name && lead.email && lead.company)
+          .filter((lead) => lead.name && lead.email && lead.company);
 
-        setLeads([...leads, ...newLeads])
-        setIsAddDialogOpen(false)
-        setCsvFile(null)
-        setCsvPreview([])
-        setCsvError("")
-        setIsProcessingCsv(false)
+        setLeads([...leads, ...newLeads]);
+        setIsAddDialogOpen(false);
+        setCsvFile(null);
+        setCsvPreview([]);
+        setCsvError('');
+        setIsProcessingCsv(false);
       } catch (error) {
-        setCsvError("Error importing CSV file")
-        setIsProcessingCsv(false)
+        setCsvError('Error importing CSV file');
+        setIsProcessingCsv(false);
       }
-    }
+    };
 
-    reader.readAsText(csvFile)
-  }
+    reader.readAsText(csvFile);
+  };
 
   const resetCsvUpload = () => {
-    setCsvFile(null)
-    setCsvPreview([])
-    setCsvError("")
-    setIsProcessingCsv(false)
-  }
+    setCsvFile(null);
+    setCsvPreview([]);
+    setCsvError('');
+    setIsProcessingCsv(false);
+  };
 
   return (
     <div className="space-y-6 p-4 md:p-0">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Leads</h1>
-          <p className="text-muted-foreground">Manage and track your sales leads</p>
+          <p className="text-muted-foreground">
+            Manage and track your sales leads
+          </p>
         </div>
         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>
@@ -367,9 +393,15 @@ export default function LeadsPage() {
           <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Add New Lead</DialogTitle>
-              <DialogDescription>Add leads manually or import from a CSV file.</DialogDescription>
+              <DialogDescription>
+                Add leads manually or import from a CSV file.
+              </DialogDescription>
             </DialogHeader>
-            <Tabs defaultValue="manual" className="w-full" onValueChange={resetCsvUpload}>
+            <Tabs
+              defaultValue="manual"
+              className="w-full"
+              onValueChange={resetCsvUpload}
+            >
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="manual">Manual Entry</TabsTrigger>
                 <TabsTrigger value="csv">CSV Upload</TabsTrigger>
@@ -390,11 +422,11 @@ export default function LeadsPage() {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="phone">Phone</Label>
-                      <Input id="phone" name="phone" />
+                      <Input id="phone" name="phone" required />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="company">Company</Label>
-                      <Input id="company" name="company" required />
+                      <Input id="company" name="company" />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
@@ -442,7 +474,11 @@ export default function LeadsPage() {
                     <Textarea id="notes" name="notes" />
                   </div>
                   <div className="flex justify-end gap-2">
-                    <Button type="button" variant="outline" onClick={() => setIsAddDialogOpen(false)}>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setIsAddDialogOpen(false)}
+                    >
                       Cancel
                     </Button>
                     <Button type="submit">Add Lead</Button>
@@ -467,11 +503,11 @@ export default function LeadsPage() {
                         variant="outline"
                         size="sm"
                         onClick={() => {
-                          const link = document.createElement("a")
+                          const link = document.createElement('a');
                           link.href =
-                            "data:text/csv;charset=utf-8,name,email,phone,company,position,status,value,source,notes\nJohn Doe,john@example.com,+1234567890,Example Corp,Manager,warm,5000,Website,Sample lead"
-                          link.download = "leads_template.csv"
-                          link.click()
+                            'data:text/csv;charset=utf-8,name,email,phone,company,position,status,value,source,notes\nJohn Doe,john@example.com,+1234567890,Example Corp,Manager,warm,5000,Website,Sample lead';
+                          link.download = 'leads_template.csv';
+                          link.click();
                         }}
                       >
                         <FileText className="h-4 w-4 mr-2" />
@@ -479,7 +515,8 @@ export default function LeadsPage() {
                       </Button>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Required columns: name, email, company. Optional: phone, position, status, value, source, notes
+                      Required columns: name, email, Phone. Optional: company,
+                      position, status, value, source, notes
                     </p>
                   </div>
 
@@ -493,7 +530,9 @@ export default function LeadsPage() {
                   {isProcessingCsv && (
                     <Alert>
                       <Upload className="h-4 w-4" />
-                      <AlertDescription>Processing CSV file...</AlertDescription>
+                      <AlertDescription>
+                        Processing CSV file...
+                      </AlertDescription>
                     </Alert>
                   )}
 
@@ -503,7 +542,10 @@ export default function LeadsPage() {
                       <div className="border rounded-md p-4 max-h-60 overflow-y-auto">
                         <div className="space-y-2">
                           {csvPreview.map((lead, index) => (
-                            <div key={index} className="flex items-center gap-2 p-2 bg-muted rounded text-sm">
+                            <div
+                              key={index}
+                              className="flex items-center gap-2 p-2 bg-muted rounded text-sm"
+                            >
                               <CheckCircle className="h-4 w-4 text-green-600" />
                               <span className="font-medium">{lead.name}</span>
                               <span className="text-muted-foreground">•</span>
@@ -512,8 +554,13 @@ export default function LeadsPage() {
                               <span>{lead.company}</span>
                               {lead.status && (
                                 <>
-                                  <span className="text-muted-foreground">•</span>
-                                  <Badge className={getStatusColor(lead.status)} variant="secondary">
+                                  <span className="text-muted-foreground">
+                                    •
+                                  </span>
+                                  <Badge
+                                    className={getStatusColor(lead.status)}
+                                    variant="secondary"
+                                  >
                                     {lead.status}
                                   </Badge>
                                 </>
@@ -526,13 +573,17 @@ export default function LeadsPage() {
                   )}
 
                   <div className="flex justify-end gap-2">
-                    <Button type="button" variant="outline" onClick={() => setIsAddDialogOpen(false)}>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setIsAddDialogOpen(false)}
+                    >
                       Cancel
                     </Button>
                     <Button
                       type="button"
                       onClick={handleCsvImport}
-                      disabled={!csvFile || csvError !== "" || isProcessingCsv}
+                      disabled={!csvFile || csvError !== '' || isProcessingCsv}
                     >
                       <Upload className="h-4 w-4 mr-2" />
                       Import Leads
@@ -576,10 +627,14 @@ export default function LeadsPage() {
               <div className="flex items-start justify-between">
                 <div>
                   <CardTitle className="text-lg">{lead.name}</CardTitle>
-                  <p className="text-sm text-muted-foreground">{lead.position}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {lead.position}
+                  </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge className={getStatusColor(lead.status)}>{lead.status}</Badge>
+                  <Badge className={getStatusColor(lead.status)}>
+                    {lead.status}
+                  </Badge>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="sm">
@@ -589,8 +644,16 @@ export default function LeadsPage() {
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem>Edit</DropdownMenuItem>
                       <CallResponseDialog callDetails={lead} />
-                      <DropdownMenuItem onClick={() => { handleEmailClick(lead) }}>Email</DropdownMenuItem>
-                      <DropdownMenuItem className="text-red-600">Delete</DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          handleEmailClick(lead);
+                        }}
+                      >
+                        Email
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="text-red-600">
+                        Delete
+                      </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
@@ -611,12 +674,19 @@ export default function LeadsPage() {
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Calendar className="h-4 w-4 text-muted-foreground" />
-                <span>Last contact: {new Date(lead.lastContact).toLocaleDateString()}</span>
+                <span>
+                  Last contact:{' '}
+                  {new Date(lead.lastContact).toLocaleDateString()}
+                </span>
               </div>
               <div className="pt-2 border-t">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Deal Value</span>
-                  <span className="font-semibold">${lead.value.toLocaleString()}</span>
+                  <span className="text-sm text-muted-foreground">
+                    Deal Value
+                  </span>
+                  <span className="font-semibold">
+                    ${lead.value.toLocaleString()}
+                  </span>
                 </div>
                 <div className="flex items-center justify-between mt-1">
                   <span className="text-sm text-muted-foreground">Source</span>
@@ -625,12 +695,24 @@ export default function LeadsPage() {
               </div>
               {lead.notes && (
                 <div className="pt-2 border-t">
-                  <p className="text-sm text-muted-foreground line-clamp-2">{lead.notes}</p>
+                  <p className="text-sm text-muted-foreground line-clamp-2">
+                    {lead.notes}
+                  </p>
                 </div>
               )}
               <div className="flex gap-2 pt-2">
-                <CallResponseDialog buttonClassName="flex-1 bg-transparent" callDetails={lead} />
-                <Button size="sm" variant="outline" className="flex-1 bg-transparent" onClick={() => { handleEmailClick(lead) }}>
+                <CallResponseDialog
+                  buttonClassName="flex-1 bg-transparent"
+                  callDetails={lead}
+                />
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="flex-1 bg-transparent"
+                  onClick={() => {
+                    handleEmailClick(lead);
+                  }}
+                >
                   <Mail className="h-4 w-4 mr-2" />
                   Email
                 </Button>
@@ -642,9 +724,11 @@ export default function LeadsPage() {
 
       {filteredLeads.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-muted-foreground">No leads found matching your criteria.</p>
+          <p className="text-muted-foreground">
+            No leads found matching your criteria.
+          </p>
         </div>
       )}
     </div>
-  )
+  );
 }
