@@ -6,7 +6,7 @@ import { AppHeader } from '@/components/app-header';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/app-sidebar';
 import type { Viewport } from 'next';
-import PWAInstallPrompt from '@/components/PWAInstallPrompt';
+import { PWAInstallPrompt } from '@/components/PWAInstallPrompt';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -51,15 +51,16 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
 
         <link
-          rel="apple-touch-icon"
-          href="/placeholder.svg?height=180&width=180"
-        />
-        <link
           rel="icon"
           type="image/svg+xml"
           href="/placeholder.svg?height=32&width=32"
         />
-        <link rel="manifest" href="/manifest.webmanifest" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link rel="manifest" href="/manifest.json" />
         <link rel="shortcut icon" href="/placeholder.svg?height=32&width=32" />
       </head>
       <body className={inter.className}>
